@@ -2,7 +2,7 @@
 #
 # Chris's fifth Dockerfile
 
-FROM ubuntu:latest
+FROM ubuntu:18.04
 
 # mysql setup
 # environment
