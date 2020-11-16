@@ -16,8 +16,10 @@ ENV MYSQL_USER=mysql \
     DB_PASS=R#s1sWe#EW8 \
     DB_SQL=/working/pad-database.sql
 
+# updates
 RUN apt-get update \
  && apt-get install zip -y \
+ && apt-get install -y python3-pip \
  && DEBIAN_FRONTEND=noninteractive apt-get install -y mysql-server=${MYSQL_VERSION}* \
  && rm -rf ${MYSQL_DATA_DIR} \
  && rm -rf /var/lib/apt/lists/*
@@ -32,10 +34,15 @@ EXPOSE 3306/tcp
 WORKDIR /working
 COPY database/pad-database.sql /working/pad-database.sql
 
+# get images
 RUN mkdir /working/images
 ADD https://pad.crc.nd.edu/images/padimages/results/msh_tanzania_data.zip /working/images
 RUN unzip /working/images/msh_tanzania_data.zip -d images
 RUN rm /working/images/msh_tanzania_data.zip
+
+# load tensorflow
+# load tensorflow
+RUN pip3 install tensorflow
 
 ENTRYPOINT ["/sbin/entrypoint.sh"]
 
