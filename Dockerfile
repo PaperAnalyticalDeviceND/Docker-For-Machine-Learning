@@ -17,6 +17,7 @@ ENV MYSQL_USER=mysql \
     DB_SQL=/working/pad-database.sql
 
 RUN apt-get update \
+ && apt-get install zip -y \
  && DEBIAN_FRONTEND=noninteractive apt-get install -y mysql-server=${MYSQL_VERSION}* \
  && rm -rf ${MYSQL_DATA_DIR} \
  && rm -rf /var/lib/apt/lists/*
@@ -30,6 +31,11 @@ EXPOSE 3306/tcp
 # copy SQL into PAD database
 WORKDIR /working
 COPY database/pad-database.sql /working/pad-database.sql
+
+RUN mkdir /working/images
+ADD https://pad.crc.nd.edu/images/padimages/results/msh_tanzania_data.zip /working/images
+RUN unzip /working/images/msh_tanzania_data.zip -d images
+RUN rm /working/images/msh_tanzania_data.zip
 
 ENTRYPOINT ["/sbin/entrypoint.sh"]
 
