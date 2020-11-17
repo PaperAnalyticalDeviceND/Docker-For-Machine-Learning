@@ -33,16 +33,23 @@ EXPOSE 3306/tcp
 # copy SQL into PAD database
 WORKDIR /working
 COPY database/pad-database.sql /working/pad-database.sql
-COPY scripts/* /working
+COPY scripts/* /working/
 
 # get images
 ADD http://www.crc.nd.edu/~csweet1/padimages/msh_tanzania_data_227.zip /working
-RUN unzip /working/msh_tanzania_data_227.zip -d images
+RUN unzip /working/msh_tanzania_data_227.zip
 RUN rm /working/msh_tanzania_data_227.zip
 
 # load tensorflow
 RUN pip3 install tensorflow
 RUN pip3 install Pillow
+
+# load msh images
+ADD http://www.crc.nd.edu/~csweet1/padimages/msh_227.zip /working
+RUN unzip /working/msh_227.zip
+RUN mkdir -p /var/www/html/joomla/images/padimages/
+RUN mv msh /var/www/html/joomla/images/padimages/
+RUN rm /working/msh_227.zip
 
 ENTRYPOINT ["/sbin/entrypoint.sh"]
 
