@@ -33,16 +33,16 @@ EXPOSE 3306/tcp
 # copy SQL into PAD database
 WORKDIR /working
 COPY database/pad-database.sql /working/pad-database.sql
+COPY scripts/* /working
 
 # get images
-RUN mkdir /working/images
-ADD https://pad.crc.nd.edu/images/padimages/results/msh_tanzania_data.zip /working/images
-RUN unzip /working/images/msh_tanzania_data.zip -d images
-RUN rm /working/images/msh_tanzania_data.zip
+ADD http://www.crc.nd.edu/~csweet1/padimages/msh_tanzania_data_227.zip /working
+RUN unzip /working/msh_tanzania_data_227.zip -d images
+RUN rm /working/msh_tanzania_data_227.zip
 
 # load tensorflow
-# load tensorflow
 RUN pip3 install tensorflow
+RUN pip3 install Pillow
 
 ENTRYPOINT ["/sbin/entrypoint.sh"]
 
