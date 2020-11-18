@@ -49,9 +49,9 @@ The container loads the MSH training/test images to folder ```/working/msh_msh_t
 ```
 python3 pad_caffenet_train.py
 ```
-For generating different image partitions the container loads all of the MSH images to ```/var/www/html/joomla/images/padimages/msh/processed```, the images can be found in the SQL database.
+For generating different image partitions the container loads all of the MSH images to ```/var/www/html/joomla/images/padimages/msh/processed```, the images can be located in the SQL database to obtain full metadata.
 
-All provided images are cropped to ```(71, 359, 71+636, 359+490)``` and resized to ```(227,227)``` for training. Full sized images sets are available at ```http://www.crc.nd.edu/~csweet1/padimages/```.
+All provided images are cropped to ```(71, 359, 71+636, 359+490)``` and resized to ```(227,227)``` for training. Full sized images sets are available at ```http://www.crc.nd.edu/~csweet1/padimages/```, for example ```msh.tar```.
 
 To crop and resize full size images modify the ```resize_images_bundle.py``` script to point to the selected folders and run,
 ```
