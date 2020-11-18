@@ -49,6 +49,17 @@ The container loads the MSH training/test images to folder ```/working/msh_msh_t
 ```
 python3 pad_caffenet_train.py
 ```
+The checkpointed weight files can be found in ```tmp/caffenet_pad_msh_tanzania.ckpt``` which can be loaded as follows (given that the checkpoint is ```model_checkpoint```),
+```
+#create session
+with tf.Session() as sess:
+    new_saver = tf.train.import_meta_graph(model_checkpoint+'.meta')
+    new_saver.restore(sess, model_checkpoint)
+    #load in the saved weights
+    saver.restore(sess, model_checkpoint)
+    ...
+```
+
 For generating different image partitions the container loads all of the MSH images to ```/var/www/html/joomla/images/padimages/msh/processed```, the images can be located in the SQL database to obtain full metadata.
 
 All provided images are cropped to ```(71, 359, 71+636, 359+490)``` and resized to ```(227,227)``` for training. Full sized images sets are available at ```http://www.crc.nd.edu/~csweet1/padimages/```, for example ```msh.tar```.
