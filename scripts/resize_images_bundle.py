@@ -28,6 +28,9 @@ def resize(path):
                 #Load an image from the hard drive
                 original = Image.open(path+pic)
 
+                #crop comparison
+                original = original.crop((71, 359, 71+636, 359+490))
+
                 #fix brightness
                 bright = brightness(original)
 
