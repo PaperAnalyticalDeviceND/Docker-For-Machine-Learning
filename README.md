@@ -71,7 +71,7 @@ python3 resize_images_bundle.py
 
 To predict the catagory for an image, given a set of trained weights,
 ```
-python3 predict_graph -n msh_tanzania_3k_12.nnet -i /var/www/html/joomla/images/padimages/processed/Acetaminophen-12LanePADKenya2015-1-58861.processed.png
+python3 predict_graph.py -n msh_tanzania_3k_12.nnet -i /var/www/html/joomla/images/padimages/processed/Acetaminophen-12LanePADKenya2015-1-58861.processed.png
 ```
 The nnet file contains,
 ```
