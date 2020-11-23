@@ -83,3 +83,5 @@ DESCRIPTION,MSH Tanzania data: 10 drug NN, 3k images (Tensorflow version), image
 TEST,12LanePADKenya2015
 ```
 which describes the network parameters. The weights described above can be downloaded from ```http://www.crc.nd.edu/~csweet1/padimages/caffenet_pad_msh_tanzania.tar.gz```.
+
+Note: This script works with rectified images, not the cropped and resized (227x227) images provided in the docker container.
