@@ -1,0 +1,6 @@
+DRUGS,Paracetamol Starch,Penicillin Procaine,Starch,Lactose,Amoxicillin,Cellulose,Vitamin C,Quinine,Benzyl Penicillin,Paracetamol
+LANES,
+WEIGHTS,tf_checkpoints/caffenet_pad_msh_tanzania.ckpt
+TYPE,tensorflow
+DESCRIPTION,MSH Tanzania data: 10 drug NN, 3k images (Tensorflow version), image brightness set to 165.5.
+TEST,12LanePADKenya2015
