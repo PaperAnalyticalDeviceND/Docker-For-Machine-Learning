@@ -68,3 +68,18 @@ To crop and resize full size images modify the ```resize_images_bundle.py``` scr
 ```
 python3 resize_images_bundle.py
 ```
+
+To predict the catagory for an image, given a set of trained weights,
+```
+python3 predict.py -n msh_tanzania_3k_12.nnet -i /var/www/html/joomla/images/padimages/processed/Acetaminophen-12LanePADKenya2015-1-58861.processed.png
+```
+The nnet file contains,
+```
+DRUGS,Paracetamol Starch,Penicillin Procaine,Starch,Lactose,Amoxicillin,Cellulose,Vitamin C,Quinine,Benzyl Penicillin,Paracetamol
+LANES,
+WEIGHTS,tf_checkpoints/caffenet_pad_msh_tanzania.ckpt
+TYPE,tensorflow
+DESCRIPTION,MSH Tanzania data: 10 drug NN, 3k images (Tensorflow version), image brightness set to 165.5.
+TEST,12LanePADKenya2015
+```
+which describes the network parameters.
