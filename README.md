@@ -82,4 +82,4 @@ TYPE,tensorflow
 DESCRIPTION,MSH Tanzania data: 10 drug NN, 3k images (Tensorflow version), image brightness set to 165.5.
 TEST,12LanePADKenya2015
 ```
-which describes the network parameters.
+which describes the network parameters. The weights described above can be downloaded from ```http://www.crc.nd.edu/~csweet1/padimages/caffenet_pad_msh_tanzania.tar.gz```.
