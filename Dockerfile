@@ -36,9 +36,9 @@ COPY database/pad-database.sql /working/pad-database.sql
 COPY scripts/* /working/
 
 # get images
-ADD http://www.crc.nd.edu/~csweet1/padimages/msh_tanzania_data_227.zip /working
-RUN unzip /working/msh_tanzania_data_227.zip
-RUN rm /working/msh_tanzania_data_227.zip
+ADD http://www.crc.nd.edu/~csweet1/padimages/msh_tanzania_blank_data_227.zip /working
+RUN unzip /working/msh_tanzania_blank_data_227.zip
+RUN rm /working/msh_tanzania_blank_data_227.zip
 
 # load tensorflow
 RUN pip3 install tensorflow

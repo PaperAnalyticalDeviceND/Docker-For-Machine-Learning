@@ -1,0 +1,6 @@
+DRUGS,Paracetamol Starch,Penicillin Procaine,Starch,Lactose,Amoxicillin,Cellulose,Vitamin C,Quinine,Benzyl Penicillin,Paracetamol,DI water,Blank PAD
+LANES,
+WEIGHTS,tf_checkpoints/caffenet_pad_msh_tanzania_blank.ckpt
+TYPE,tensorflow
+DESCRIPTION,MSH Tanzania data with blank and DI water cards: 12 drug NN, 3k images (Tensorflow version), no image brightness leveling.
+TEST,12LanePADKenya2015
