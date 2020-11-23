@@ -75,13 +75,13 @@ python3 predict_graph.py -n msh_tanzania_3k_12.nnet -i Acetaminophen-12LanePADKe
 ```
 The nnet file contains,
 ```
-DRUGS,Paracetamol Starch,Penicillin Procaine,Starch,Lactose,Amoxicillin,Cellulose,Vitamin C,Quinine,Benzyl Penicillin,Paracetamol
+DRUGS,Paracetamol Starch,Penicillin Procaine,Starch,Lactose,Amoxicillin,Cellulose,Vitamin C,Quinine,Benzyl Penicillin,Paracetamol,DI water,Blank PAD
 LANES,
-WEIGHTS,tf_checkpoints/caffenet_pad_msh_tanzania.ckpt
+WEIGHTS,tf_checkpoints/caffenet_pad_msh_tanzania_blank.ckpt
 TYPE,tensorflow
-DESCRIPTION,MSH Tanzania data: 10 drug NN, 3k images (Tensorflow version), image brightness set to 165.5.
+DESCRIPTION,MSH Tanzania data with blank and DI water cards: 12 drug NN, 3k images (Tensorflow version), no image brightness leveling.
 TEST,12LanePADKenya2015
 ```
-which describes the network parameters. The weights described above can be downloaded from ```http://www.crc.nd.edu/~csweet1/padimages/caffenet_pad_msh_tanzania.tar.gz```.
+which describes the network parameters. The weights described above can be downloaded from ```http://www.crc.nd.edu/~csweet1/padimages/caffenet_pad_msh_tanzania_blank.tar.gz```.
 
 Note: This script works with rectified images, not the cropped and resized (227x227) images provided in the docker container.
