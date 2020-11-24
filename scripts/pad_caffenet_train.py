@@ -10,7 +10,7 @@
 # Load libraries. We need tensorflow and numpy for training the CNN,
 # PIL for loading images, and random to partition the data into test and training sets
 import tensorflow.compat.v1 as tf
-tf.disable_v2_behavior() 
+tf.disable_v2_behavior()
 import numpy as np
 import math
 from os.path import dirname, abspath
@@ -28,10 +28,10 @@ random.seed(seed)
 
 
 #lookup, output 0-8
-lookup = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+lookup = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
 
 #variables
-classes = 10 #Amoxicillin rerun,Acetaminophen,Ciprofloxacin,Ceftriaxone,Metformin,Ampicillin,Azithromycin,Cefuroxime Axetil,Levofloxacin
+classes = 12 #Amoxicillin rerun,Acetaminophen,Ciprofloxacin,Ceftriaxone,Metformin,Ampicillin,Azithromycin,Cefuroxime Axetil,Levofloxacin
 
 #Flags to create train and test variables first time through
 firstTrain = True
@@ -41,12 +41,12 @@ firstTest = True
 with open('msh_tanzania_data/training/labels.csv') as f:
     #get lines
     train_labels = f.readlines()
-    
+
     #loop over label lines
     for labels in train_labels:
         #get filename/label
         label_lookup, file  = labels.split(',')
-        
+
         #lookup
         label = lookup[int(label_lookup)]
         #print("Lookup training", label_lookup, label)
@@ -66,7 +66,7 @@ with open('msh_tanzania_data/training/labels.csv') as f:
             #add a "1 hot" vector to the label array
             trainLabel = np.mat(np.eye(classes)[int(label)])
         else:
-            #append once we have saved the first image               
+            #append once we have saved the first image
             train = np.append(train, np.mat(np.asarray(im).flatten()), axis=0)
             #add a "1 hot" vector to the label array
             trainLabel = np.append(trainLabel, np.mat(np.eye(classes)[int(label)]), axis=0)
@@ -75,16 +75,16 @@ with open('msh_tanzania_data/training/labels.csv') as f:
 with open('msh_tanzania_data/test/labels.csv') as f:
     #get lines
     test_labels = f.readlines()
-    
+
     #loop over label lines
     for labels in test_labels:
         #get filename/label
         label_lookup, file = labels.split(',')
-        
+
         #lookup
         label = lookup[int(label_lookup)]
         #print("Lookup test", label_lookup, label)
-        
+
         #Load png file using the PIL library
         im = PIL.Image.open(file.strip())
 
@@ -102,7 +102,7 @@ with open('msh_tanzania_data/test/labels.csv') as f:
             #add a "1 hot" vector to the label array
             testLabel = np.mat(np.eye(classes)[int(label)])
         else:
-            #append once we have saved the first image               
+            #append once we have saved the first image
             test = np.append(test, np.mat(np.asarray(im).flatten()), axis=0)
             #add a "1 hot" vector to the label array
             testLabel = np.append(testLabel, np.mat(np.eye(classes)[int(label)]), axis=0)
@@ -116,7 +116,7 @@ print("Test size",test.shape, testLabel.shape)
 
 # Parameters for training
 #learning rate is the step size that we move in the opposite direction of the gradient for each weight/bias
-learning_rate = 1e-4 
+learning_rate = 1e-4
 #an epoch represents having trained with a number of images equal to the training test size
 max_epochs = 100
 display_step_size = 10 # Number of iterations before checking on the performance of network (validation)
@@ -189,7 +189,7 @@ def generate_biases(size, name):
     return tf.Variable(tf.constant(0.0, shape=[size]), name=name)
 
 # compute convolutions with relu output
-def convolution(input_data,num_channels, filter_size, num_filters, stride, name_w, name_b): 
+def convolution(input_data,num_channels, filter_size, num_filters, stride, name_w, name_b):
     #shape for weights
     shape = [filter_size, filter_size, num_channels, num_filters]
     # Generate new weights
@@ -205,7 +205,7 @@ def convolution(input_data,num_channels, filter_size, num_filters, stride, name_
     return out, W, b
 
 #max pooling layer
-def max_pooling(input_data,size,window): 
+def max_pooling(input_data,size,window):
     out = tf.nn.max_pool(value=input_data, ksize=[1, window, window, 1], strides=[1, size, size, 1], padding='SAME')
     return out
 
@@ -315,23 +315,23 @@ test_accurracy = [0]  # accuracy on test data
 with tf.Session() as sess:
     #initialize session
     sess.run(init)
-    
+
     #load in the saved weights, if the file exists
     #checkpointing creates a number of files including .meta
     if os.path.exists(model_checkpoint + ".meta"):
         saver.restore(sess, model_checkpoint)
         print("Loaded saved checkpoint",model_checkpoint)
-        
+
     #start at epoch 0
     epoch =0
 
     #loop through the epochs we set (100)
     while epoch < max_epochs+1:
-        #get a mini batch of size batchsize, 
+        #get a mini batch of size batchsize,
         train_loss = 0
         train_acc = 0
         loop_number = 0
-        
+
         #lets take a smaller number for GPU, 250?
         image_loops = math.floor(train.shape[0] / image_batch_size)
         for i in range(image_loops):
@@ -354,13 +354,13 @@ with tf.Session() as sess:
             #let's accumulate the loss and accuracy
             train_loss += train_loss_batch
             train_acc += train_acc_batch
-        
+
         #adjust stat accumulations
         train_loss = train_loss / loop_number
         train_acc = train_acc / loop_number
-        
+
         #save the training loss for graph
-        training_loss.append(train_loss) 
+        training_loss.append(train_loss)
         # Print status every 10 iterations.
         if epoch % display_step_size == 0:
             training_accuracy.append(train_acc * 100)
@@ -369,7 +369,7 @@ with tf.Session() as sess:
             test_acc = 0
             tst_loss = 0
             loop_number = 0
-            
+
             #actually lets take a smaller number for GPU, 250?
             image_loops = math.floor(test.shape[0] / image_batch_size)
             for i in range(image_loops):
@@ -384,18 +384,18 @@ with tf.Session() as sess:
                 test_acc += test_acc_batch
                 tst_loss += tst_loss_batch
                 #print("Test loss",tst_loss_batch)
-                    
+
             #adjust stat accumulations
             test_acc = test_acc / loop_number
             tst_loss = tst_loss / loop_number
-                
+
             #save the data for plotting
             test_accurracy.append(test_acc*100)
             test_loss[0].append(epoch)
             test_loss[1].append(tst_loss)
 
             print ("Epoch: {0:>3}, Training Loss:{1:>6.8f}, Training Accuracy:{2:>6.1%}, Test loss: {3:>6.8f},"                   "Test accuracy: {4:>6.1%}".format(epoch, train_loss, train_acc, tst_loss,test_acc))
-            
+
             # Save the variables to disk.
             save_path = saver.save(sess, model_checkpoint)
             print("Model saved in file: %s" % save_path)
@@ -410,7 +410,3 @@ with tf.Session() as sess:
 
 
 # In[ ]:
-
-
-
-
